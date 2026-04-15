@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@libsql/client": "^0.17.2",
     "@pothos/core": "^4.12.0",
     "@pothos/plugin-prisma": "^4.14.3",
+    "@prisma/adapter-libsql": "^7.7.0",
     "@prisma/client": "^7.7.0",
     "graphql": "^16.13.2",
     "graphql-yoga": "^5.21.0",

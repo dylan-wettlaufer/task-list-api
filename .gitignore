@@ -5,3 +5,7 @@ node_modules
 /generated/prisma
 dist
 *.log
+prisma/dev.db
+prisma/*.db-journal
+prisma/*.db-wal
+prisma/*.db-shm
