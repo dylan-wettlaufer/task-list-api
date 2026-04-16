@@ -64,3 +64,28 @@ builder.mutationField("deleteTask", (t) =>
       },
     })
   );
+
+
+// BONUS: Update Task
+builder.mutationField("updateTask", (t) =>
+    t.prismaField({
+        type: "Task",
+        nullable: true,
+        args: {
+            id: t.arg.string({ required: true }),
+            title: t.arg.string({ required: false }),
+        },
+        resolve: async (query, _root, args) => {
+            const parsedArgs = updateTaskInput.safeParse(args);
+            if (!parsedArgs.success) {
+                throw new GraphQLError(parsedArgs.error.issues[0]?.message ?? "Invalid task input");
+            }
+
+            const { id, title } = parsedArgs.data;
+            const task = await prisma.task.findUnique({ ...query, where: { id } });
+            if (!task) throw new GraphQLError(`Task ${id} not found`);
+            const updatedTask = await prisma.task.update({ ...query, where: { id }, data: { title: title ?? task.title } });
+            return updatedTask;
+        }
+    })
+);
