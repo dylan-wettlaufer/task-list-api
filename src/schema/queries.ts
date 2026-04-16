@@ -3,6 +3,7 @@ import { prisma } from "../db.js";
 import { GraphQLError } from "graphql";
 import { taskIdInput } from "./validators.js";
 
+// Returns all tasks, newest first.
 builder.queryField("tasks",  (t) =>
     t.prismaField({
         type: ["Task"],
@@ -11,6 +12,7 @@ builder.queryField("tasks",  (t) =>
     })
 );
 
+// Returns a single task by id.
 builder.queryField("task", (t) =>
     t.prismaField({
         type: "Task",
@@ -25,9 +27,8 @@ builder.queryField("task", (t) =>
             }
 
             const { id } = parsedArgs.data;
-            const task = await prisma.task.findUnique({ ...query, where: { id } });
-            if (!task) throw new GraphQLError(`Task ${id} not found`);
-            return task;
+            // Not found maps to null
+            return prisma.task.findUnique({ ...query, where: { id } });
         }
     })
 );

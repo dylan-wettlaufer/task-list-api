@@ -3,6 +3,7 @@ import { prisma } from "../db.js";
 import { GraphQLError } from "graphql";
 import { addTaskInput, taskIdInput, updateTaskInput } from "./validators.js";
 
+// Creates a new task with
 builder.mutationField("addTask", (t) =>
     t.prismaField({
         type: "Task",
@@ -22,6 +23,7 @@ builder.mutationField("addTask", (t) =>
     })
 );
 
+// Flips the completed state for a task.
 builder.mutationField("toggleTask", (t) =>
     t.prismaField({
         type: "Task",
@@ -44,6 +46,7 @@ builder.mutationField("toggleTask", (t) =>
     })
 );
 
+// Removes a task permanently.
 builder.mutationField("deleteTask", (t) =>
     t.prismaField({
       type: "Task",

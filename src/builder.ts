@@ -5,6 +5,7 @@ import { getDatamodel } from "@pothos/plugin-prisma/generated";
 import { prisma } from "./db.js";
 import { DateTimeResolver } from "graphql-scalars";
 
+// Central Pothos builder used by every object, query, and mutation definition.
 export const builder = new SchemaBuilder<{
   PrismaTypes: PrismaTypes;
   Scalars: {
@@ -23,6 +24,7 @@ export const builder = new SchemaBuilder<{
   },
 });
 
+// Reuse a shared DateTime scalar for Prisma timestamp fields.
 builder.addScalarType("DateTime", DateTimeResolver, {});
 builder.queryType({});
 builder.mutationType({});
