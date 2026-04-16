@@ -1,6 +1,8 @@
 import { createYoga } from "graphql-yoga";
 import { createServer } from "node:http";
 import { builder } from "./builder.js";
+import "./schema/task.type.js";
+import "./schema/queries.js";
 
 builder.queryType({
   fields: (t) => ({
