@@ -1,8 +1,6 @@
-import { createYoga } from 'graphql-yoga';
-import { createServer } from 'node:http';
-import SchemaBuilder from '@pothos/core';
-
-const builder = new SchemaBuilder({});
+import { createYoga } from "graphql-yoga";
+import { createServer } from "node:http";
+import { builder } from "./builder.js";
 
 builder.queryType({
   fields: (t) => ({
@@ -20,6 +18,7 @@ const yoga = createYoga({
 });
 
 const server = createServer(yoga);
+
 server.listen(3000, () => {
   console.log('Visit http://localhost:3000/graphql');
 });
