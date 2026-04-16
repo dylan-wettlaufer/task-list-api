@@ -3,17 +3,7 @@ import { createServer } from "node:http";
 import { builder } from "./builder.js";
 import "./schema/task.type.js";
 import "./schema/queries.js";
-
-builder.queryType({
-  fields: (t) => ({
-    hello: t.string({
-      args: {
-        name: t.arg.string(),
-      },
-      resolve: (parent, { name }) => `hello, ${name || 'World'}`,
-    }),
-  }),
-});
+import "./schema/mutations.js";
 
 const yoga = createYoga({
   schema: builder.toSchema(),
@@ -22,5 +12,5 @@ const yoga = createYoga({
 const server = createServer(yoga);
 
 server.listen(3000, () => {
-  console.log('Visit http://localhost:3000/graphql');
+  console.log("Visit http://localhost:3000/graphql");
 });
