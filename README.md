@@ -112,13 +112,11 @@ GraphQL endpoint:
 ### Query all tasks
 
 ```graphql
-query Tasks {
+query {
   tasks {
     id
     title
     completed
-    createdAt
-    updatedAt
   }
 }
 ```
@@ -126,8 +124,8 @@ query Tasks {
 ### Query a single task
 
 ```graphql
-query Task($id: String!) {
-  task(id: $id) {
+query {
+  task(id: "TASK_ID") {
     id
     title
     completed
@@ -138,11 +136,10 @@ query Task($id: String!) {
 ### Add a task
 
 ```graphql
-mutation AddTask($title: String!) {
-  addTask(title: $title) {
+mutation {
+  addTask(title: "Go shopping") {
     id
     title
-    completed
   }
 }
 ```
@@ -150,10 +147,9 @@ mutation AddTask($title: String!) {
 ### Toggle a task
 
 ```graphql
-mutation ToggleTask($id: String!) {
-  toggleTask(id: $id) {
+mutation {
+  toggleTask(id: "TASK_ID") {
     id
-    title
     completed
   }
 }
@@ -162,8 +158,8 @@ mutation ToggleTask($id: String!) {
 ### Delete a task
 
 ```graphql
-mutation DeleteTask($id: String!) {
-  deleteTask(id: $id) {
+mutation {
+  deleteTask(id: "TASK_ID") {
     id
   }
 }
@@ -172,8 +168,8 @@ mutation DeleteTask($id: String!) {
 ### Bonus: update a task title
 
 ```graphql
-mutation UpdateTask($id: String!, $title: String) {
-  updateTask(id: $id, title: $title) {
+mutation {
+  updateTask(id: "TASK_ID", title: "Updated title") {
     id
     title
     completed
